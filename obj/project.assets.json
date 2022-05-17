@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\C#\\SeaBattleV3\\SeaBattleV3.csproj",
+      "projectUniqueName": "D:\\Projects\\C#\\something\\BattleShipVKI\\SeaBattleV3.csproj",
       "projectName": "SeaBattleV3",
-      "projectPath": "D:\\Projects\\C#\\SeaBattleV3\\SeaBattleV3.csproj",
+      "projectPath": "D:\\Projects\\C#\\something\\BattleShipVKI\\SeaBattleV3.csproj",
       "packagesPath": "C:\\Users\\Nikita\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\C#\\SeaBattleV3\\obj\\",
+      "outputPath": "D:\\Projects\\C#\\something\\BattleShipVKI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Nikita\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -63,7 +63,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
