@@ -8,20 +8,28 @@
     "net5.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Nikita\\.nuget\\packages\\": {}
+    "C:\\Users\\kutovenkonr\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\C#\\something\\BattleShipVKI\\SeaBattleV3.csproj",
+      "projectUniqueName": "G:\\Project\\C#\\BattleShipVKI\\SeaBattleV3.csproj",
       "projectName": "SeaBattleV3",
-      "projectPath": "D:\\Projects\\C#\\something\\BattleShipVKI\\SeaBattleV3.csproj",
-      "packagesPath": "C:\\Users\\Nikita\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\C#\\something\\BattleShipVKI\\obj\\",
+      "projectPath": "G:\\Project\\C#\\BattleShipVKI\\SeaBattleV3.csproj",
+      "packagesPath": "C:\\Users\\kutovenkonr\\.nuget\\packages\\",
+      "outputPath": "G:\\Project\\C#\\BattleShipVKI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Nikita\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "\\\\iscsi\\profiles\\kutovenkonr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0-windows7.0"
@@ -63,7 +71,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

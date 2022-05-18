@@ -5,8 +5,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationIcon>favicon2.ico</ApplicationIcon>
+    <ApplicationIcon>Materials\favicon2.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="favicon2.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="favicon2.ico" />
@@ -35,6 +39,10 @@
 
   <ItemGroup>
     <Folder Include="Resourses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_DeploymentManifestIconFile Remove="favicon2.ico" />
   </ItemGroup>
 
 </Project>

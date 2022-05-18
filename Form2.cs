@@ -18,41 +18,33 @@ namespace SeaBattleV3
         public Form1 frm1;
         const int n = 10;
         int x0 = 30, y0 = 45, h = 32, xd = 396;
-        public int[,] arr1 = new int[n, n];
-        public int[,] arr2 = new int[n, n];
-        
+        public double[,] arr1 = new double[n, n];
+        public double[,] arr2 = new double[n, n];      
         public Button [,] bArr1 = new Button[n, n];
         public Button[,] bArr2 = new Button[n, n];
 
         Random rnd = new Random();
 
-        List<int> ships = new () 
+        List<double> ships = new()
         {
-            1
+            4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
         };
+
+        // 1.xx - кол-во палуб;
+        // x.1x - номер;
+
 
         public Form2(Form1 frm1)
         {
             InitializeComponent();
             this.frm1 = frm1;
-            //arr1 = Ship.filling(n);
-            //test();
             
         }
 
-        ////public void test()
-        //{
-        //    for (int i = 0; i < n; i++)
-        //    {
-        //        for (int j = 0; j < n; j++)
-        //            label4.Text += arr1[i, j].ToString() + "   ";
-        //        label4.Text += "\n";
-        //    }
-                
-        //}
-
         private void Form2_Load(object sender, EventArgs e)
         {
+            arr2 = frm1.distribution(arr2, n, ships);
+
             if (frm1.textBox1.Text == "")
                 frm1.textBox1.Text = "Player1";
             this.Text = frm1.textBox1.Text;
@@ -83,9 +75,13 @@ namespace SeaBattleV3
             {
                 for (int j = 0; j < n; j++)
                 {
-                    arr2[i, j] = 0;
+                    //arr2[i, j] = 0;
                     bArr2[i, j] = new Button();
-                    bArr2[i, j].Text = arr1[i, j].ToString();
+                    //bArr2[i, j].Text = arr2[i, j].ToString();
+                    if (arr2[i,j] == 0)
+                    {
+                        bArr2[i, j].BackColor = Color.Aqua;
+                    }
                     bArr2[i, j].Width = h;
                     bArr2[i, j].Height = h;
                     bArr2[i, j].Left = x0 + j * h + xd;
@@ -94,20 +90,6 @@ namespace SeaBattleV3
                     Controls.Add(bArr2[i, j]);
                 }
             }
-            arr2[0, 0] = 1;
-            bArr2[0, 0].Text = arr2[0, 0].ToString();
-            arr2[1, 1] = 1;
-            bArr2[1, 1].Text = arr2[1, 1].ToString();
-            arr2[2, 2] = 1;
-            bArr2[2, 2].Text = arr2[2, 2].ToString();
-            arr2[3, 3] = 1;
-            bArr2[3, 3].Text = arr2[3, 3].ToString();
-            arr2[4, 4] = 1;
-            bArr2[4, 4].Text = arr2[4, 4].ToString();
-            //arr2[4, 6] = ships[0];
-            //bArr2[4,6].Text = arr2[4,6].ToString();
-
-
         }
 
         public void bt_Click(object sender, EventArgs e)
@@ -120,7 +102,7 @@ namespace SeaBattleV3
 
             if (!frm1.compflag)
             {
-                if (frm1.flag == 0)
+                if (frm1.hod == 0)
                 {
                     arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
                     bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
@@ -134,7 +116,7 @@ namespace SeaBattleV3
                         bArr1[i0, j0].BackColor = Color.Red;
                         frm1.frm3.bArr2[i0, j0].BackColor = Color.Red;
                     }
-                    frm1.flag = 1;
+                    frm1.hod = 1;
                     label6.Text = "Ход противника";
                     frm1.frm3.label6.Text = "Ваш ход";
                     //this.Hide();
@@ -167,6 +149,21 @@ namespace SeaBattleV3
             //bArr1[i0, j0].Text = "";
             //bArr1[i0, j0].Image = Properties.Resources._3117918;
         }
+
+        //bool potopil(int ia, int ja)
+        //{
+        //    if (arr2[ia,ja] % 10 == 1)
+        //    {
+    
+        //    }
+
+        //    else if (arr2[ia, ja] % 10 == 2)
+        //    {
+
+        //    }
+
+        //    return false;
+        //}
 
     }
 
