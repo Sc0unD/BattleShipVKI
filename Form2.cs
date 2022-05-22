@@ -17,7 +17,7 @@ namespace SeaBattleV3
     {
         public Form1 frm1;
         const int n = 10;
-        int x0 = 30, y0 = 45, h = 32, xd = 396;
+        int x0 = 30, y0 = 45, h = 34, xd = 396;
         public double[,] arr1 = new double[n, n];
         public double[,] arr2 = new double[n, n];      
         public Button [,] bArr1 = new Button[n, n];
@@ -30,20 +30,22 @@ namespace SeaBattleV3
             4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
         };
 
-        // 1.xx - кол-во палуб;
-        // x.1x - номер;
+        // 1.x - кол-во палуб;
+        // x.1 - номер;
 
 
         public Form2(Form1 frm1)
         {
             InitializeComponent();
             this.frm1 = frm1;
+            this.Width = 812;
+            this.Height = 514;
             
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            arr2 = frm1.distribution(arr2, n, ships);
+            //arr2 = frm1.distribution(arr2, n, ships);
 
             if (frm1.textBox1.Text == "")
                 frm1.textBox1.Text = "Player1";
@@ -58,9 +60,9 @@ namespace SeaBattleV3
             {
                 for (int j = 0; j < n; j++)
                 {
-                    arr1[i, j] = 0;
+                    arr1[i, j] = -1;
                     bArr1[i, j] = new Button();
-                    bArr1[i, j].Text = arr1[i, j].ToString();
+                    //bArr1[i, j].Text = arr1[i, j].ToString();
                     bArr1[i, j].Width = h;
                     bArr1[i, j].Height = h;
                     bArr1[i, j].Left = x0 + j * h;
@@ -82,6 +84,11 @@ namespace SeaBattleV3
                     {
                         bArr2[i, j].BackColor = Color.Aqua;
                     }
+                    else
+                    {
+                        bArr2[i, j].BackColor = Color.GhostWhite;
+
+                    }
                     bArr2[i, j].Width = h;
                     bArr2[i, j].Height = h;
                     bArr2[i, j].Left = x0 + j * h + xd;
@@ -95,75 +102,65 @@ namespace SeaBattleV3
         public void bt_Click(object sender, EventArgs e)
         {
             Button bt = (Button)sender;
+            DialogResult dg;
             int i0, j0;
             i0 = (bt.Top - y0) / h;
             j0 = (bt.Left - x0) / h;
-            
+
 
             if (!frm1.compflag)
             {
-                if (frm1.hod == 0)
+                if (frm1.hod == 0 && arr1[i0, j0] == -1)
                 {
-                    arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
-                    bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
-                    if (arr1[i0, j0] == 0)
+                    //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
+                    //bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
+                    if (frm1.frm3.arr2[i0, j0] == 0)
                     {
                         bArr1[i0, j0].BackColor = Color.Aqua;
-                        frm1.frm3.bArr2[i0, j0].BackColor = Color.Aqua;
+                        frm1.frm3.bArr2[i0, j0].BackColor = Color.SkyBlue;
+                        arr1[i0, j0] = 0;
+                        frm1.hod = 1;
+                        label6.Text = "Ход противника";
+                        frm1.frm3.label6.Text = "Ваш ход";
+
                     }
                     else
                     {
-                        bArr1[i0, j0].BackColor = Color.Red;
-                        frm1.frm3.bArr2[i0, j0].BackColor = Color.Red;
+                        bArr1[i0, j0].BackColor = Color.Crimson;
+                        frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
+                        arr1[i0, j0] = 1;
                     }
-                    frm1.hod = 1;
-                    label6.Text = "Ход противника";
-                    frm1.frm3.label6.Text = "Ваш ход";
+
+                    frm1.frm3.arr2[i0, j0] = -1;
+
+
+
                     //this.Hide();
                     //Thread.Sleep(2000);
                     //frm1.frm3.Show();
                 }
 
-            
-               
-
-            //else
-            //{
-            //    frm1.flag = 1;
-            //    Thread.Sleep(5000);
-            //    int ic = rnd.Next(n), jc = rnd.Next(n);
-            //    while (frm1.frm3.arr1[ic,jc] != 0)
-            //    {
-            //        ic = rnd.Next(n);
-            //        jc = rnd.Next(n);
-            //    }
-
-            //    frm1.frm3.bt_Click(frm1.frm3.arr1[ic, jc],new EventArgs());
-            //    frm1.flag = 0;
-            //}
-                
             }
 
-            //this.Text = System.IO.Directory.GetCurrentDirectory() + @"\Resourses\3117918.png";
-            //int i0 = (bt.Top - y0) / h, j0 = (bt.Left - x0) / h;
-            //bArr1[i0, j0].Text = "";
-            //bArr1[i0, j0].Image = Properties.Resources._3117918;
+
+            if (frm1.lose(frm1.frm3.arr2, n))
+            {
+                dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                this.Close();
+                frm1.frm3.Close();
+
+                if (dg == DialogResult.Yes)
+                {
+                    frm1.hod = new Random().Next(2);
+                    frm1.button1_Click(sender, new EventArgs());
+                }
+            }
+
+
+
         }
 
-        //bool potopil(int ia, int ja)
-        //{
-        //    if (arr2[ia,ja] % 10 == 1)
-        //    {
-    
-        //    }
-
-        //    else if (arr2[ia, ja] % 10 == 2)
-        //    {
-
-        //    }
-
-        //    return false;
-        //}
+        
 
     }
 

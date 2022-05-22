@@ -37,11 +37,13 @@ namespace SeaBattleV3
         {
             InitializeComponent();
             this.frm1 = frm1;
-   
+            this.Width = 812;
+            this.Height = 514;
+
         }
         private void Form3_Load(object sender, EventArgs e)
         {
-            arr2 = frm1.distribution(arr2, n, ships);
+            //arr2 = frm1.distribution(arr2, n, ships);
 
             if (frm1.textBox2.Text == "")
                 frm1.textBox2.Text = "Player2";
@@ -56,9 +58,9 @@ namespace SeaBattleV3
             {
                 for (int j = 0; j < n; j++)
                 {
-                    arr1[i, j] = 0;
+                    arr1[i, j] = -1;
                     bArr1[i, j] = new Button();
-                    bArr1[i, j].Text = arr1[i, j].ToString();
+                    //bArr1[i, j].Text = arr1[i, j].ToString();
                     bArr1[i, j].Width = h;
                     bArr1[i, j].Height = h;
                     bArr1[i, j].Left = x0 + j * h;
@@ -75,7 +77,16 @@ namespace SeaBattleV3
                 {
                     //arr2[i, j] = 0;
                     bArr2[i, j] = new Button();
-                    bArr2[i, j].Text = arr2[i, j].ToString();
+                    //bArr2[i, j].Text = arr2[i, j].ToString();
+                    if (arr2[i, j] == 0)
+                    {
+                        bArr2[i, j].BackColor = Color.Aqua;
+                    }
+                    else
+                    {
+                        bArr2[i, j].BackColor = Color.GhostWhite;
+
+                    }
                     bArr2[i, j].Width = h;
                     bArr2[i, j].Height = h;
                     bArr2[i, j].Left = x0 + j * h + xd;
@@ -99,37 +110,53 @@ namespace SeaBattleV3
         {
             Button bt = (Button)sender;
 
-            
+            DialogResult dg;
             int i0, j0;
             i0 = (bt.Top - y0) / h;
             j0 = (bt.Left - x0) / h;
             
 
-            if (frm1.hod == 1)
+            if (frm1.hod == 1 && arr1[i0,j0] == -1)
             {
-                arr1[i0, j0] = frm1.frm2.arr2[i0, j0];
-                bArr1[i0, j0].Text = frm1.frm2.bArr2[i0, j0].Text;
+                //arr1[i0, j0] = frm1.frm2.arr2[i0, j0];
+                //bArr1[i0, j0].Text = frm1.frm2.bArr2[i0, j0].Text;
 
                 if (frm1.frm2.arr2[i0, j0] == 0)
                 {
                     bArr1[i0, j0].BackColor = Color.Aqua;
-                    frm1.frm2.bArr2[i0, j0].BackColor = Color.Aqua;
+                    frm1.frm2.bArr2[i0, j0].BackColor = Color.SkyBlue;
+                    frm1.hod = 0;
+                    arr1[i0, j0] = 0;
+                    label6.Text = "Ход противника";
+                    frm1.frm2.label6.Text = "Ваш ход";
                 }
                 else
                 {
-                    bArr1[i0, j0].BackColor = Color.Red;
-                    frm1.frm2.bArr2[i0, j0].BackColor = Color.Red;
+                    bArr1[i0, j0].BackColor = Color.Crimson;
+                    frm1.frm2.bArr2[i0, j0].BackColor = Color.Crimson;
+                    arr1[i0, j0] = 1;
                 }
-                frm1.hod = 0;
-                label6.Text = "Ход противника";
-                frm1.frm2.label6.Text = "Ваш ход";
+
+                frm1.frm2.arr2[i0, j0] = -1;
                 //this.Hide();
                 //Thread.Sleep(2000);
                 //frm1.frm2.Show();
 
             }
 
-            
+            if (frm1.lose(frm1.frm2.arr2, n))
+            {
+                dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                this.Close();
+                frm1.frm2.Close();
+
+                if (dg == DialogResult.Yes)
+                {
+                    frm1.hod = new Random().Next(2);
+                    frm1.button1_Click(sender, new EventArgs());
+                }
+            }
+
         }
 
     }

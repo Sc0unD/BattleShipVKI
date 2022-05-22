@@ -27,8 +27,6 @@ namespace SeaBattleV3
             InitializeComponent();
             hod = rnd.Next(2);
 
-            
-
         }
 
         public void load()
@@ -61,7 +59,7 @@ namespace SeaBattleV3
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             //btclick = 1;
             compflag = false;
@@ -167,6 +165,19 @@ namespace SeaBattleV3
 
 
             return arr;
+        }
+
+        public bool lose(double[,] arr, int n)
+        {
+            for (int i = 0; i<n; i++)
+            {
+                for (int j = 0; j<n ; j++)
+                {
+                    if (arr[i,j] > 0)
+                        return false;
+                }
+            }
+            return true;
         }
 
 
