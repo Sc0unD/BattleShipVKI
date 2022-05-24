@@ -1,0 +1,5 @@
+№1 -- Player1:Player2 -> победил Player2
+№2 -- Player1:Player2 -> победил Player1
+№3 -- Player1:Player2 -> победил Player1
+№4 -- Player1:Player2 -> победил Player1
+№5 -- Player1:Player2 -> победил Player1

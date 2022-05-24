@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HCzkjHCfBjsocM6GvOKxjUaNyhdIb4NCpCqDxvnIQuIZQ6Z/+lgNEyWhlu74NH41C3ecu0L4csUwK2lPc2vy+Q==",
+  "dgSpecHash": "6gzNXF1BDaeG1Lenvq+FMBVvnT5ExhrtmMfLOYCxNiLKveFVCecayvCbn9d3HoPqXRfHg/nX5L5FJ7ss9ae11Q==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\C#\\something\\BattleShipVKI1\\SeaBattleV3.csproj",
+  "projectFilePath": "D:\\Projects\\BattleShipVKI1\\SeaBattleV3.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

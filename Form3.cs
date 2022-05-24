@@ -43,7 +43,7 @@ namespace SeaBattleV3
         }
         private void Form3_Load(object sender, EventArgs e)
         {
-            //arr2 = frm1.distribution(arr2, n, ships);
+            arr2 = frm1.distribution(arr2, n, ships);
 
             if (frm1.textBox2.Text == "")
                 frm1.textBox2.Text = "Player2";
@@ -147,6 +147,7 @@ namespace SeaBattleV3
             if (frm1.lose(frm1.frm2.arr2, n))
             {
                 dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                frm1.writeToMatchesFile(this.Text);
                 this.Close();
                 frm1.frm2.Close();
 
