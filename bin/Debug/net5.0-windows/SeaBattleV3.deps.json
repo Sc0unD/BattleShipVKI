@@ -7,8 +7,19 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "SeaBattleV3/1.0.0": {
+        "dependencies": {
+          "ForBattleShip": "1.0.0.0"
+        },
         "runtime": {
           "SeaBattleV3.dll": {}
+        }
+      },
+      "ForBattleShip/1.0.0.0": {
+        "runtime": {
+          "ForBattleShip.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -16,6 +27,11 @@
   "libraries": {
     "SeaBattleV3/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ForBattleShip/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

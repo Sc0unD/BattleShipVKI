@@ -22,16 +22,7 @@ namespace SeaBattleV3
 
         List<double> ships = new()
         {
-            4.1,
-            3.1,
-            3.2,
-            2.1,
-            2.2,
-            2.3,
-            1.1,
-            1.2,
-            1.3,
-            1.4
+            4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
         };
         public Form3(Form1 frm1)
         {
@@ -95,16 +86,6 @@ namespace SeaBattleV3
                     Controls.Add(bArr2[i, j]);
                 }
             }
-            //arr2[0, 0] = 1;
-            //bArr2[0, 0].Text = arr2[0, 0].ToString();
-            //arr2[1, 1] = 1;
-            //bArr2[1, 1].Text = arr2[1, 1].ToString();
-            //arr2[2, 2] = 1;
-            //bArr2[2, 2].Text = arr2[2, 2].ToString();
-            //arr2[3, 3] = 1;
-            //bArr2[3, 3].Text = arr2[3, 3].ToString();
-            //arr2[4, 4] = 1;
-            //bArr2[4, 4].Text = arr2[4, 4].ToString();
         }
         public void bt_Click(object sender, EventArgs e)
         {
@@ -129,6 +110,9 @@ namespace SeaBattleV3
                     arr1[i0, j0] = 0;
                     label6.Text = "Ход противника";
                     frm1.frm2.label6.Text = "Ваш ход";
+                    //this.Hide();
+                    //Thread.Sleep(2000);
+                    //frm1.frm2.Show();
                 }
                 else
                 {
@@ -138,9 +122,7 @@ namespace SeaBattleV3
                 }
 
                 frm1.frm2.arr2[i0, j0] = -1;
-                //this.Hide();
-                //Thread.Sleep(2000);
-                //frm1.frm2.Show();
+                
 
             }
 
