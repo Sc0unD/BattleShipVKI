@@ -28,11 +28,14 @@ namespace SeaBattleV3
         List<double> ships = new()
         {
             4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
+            // 1.x - кол-во палуб;
+            // x.1 - номер;
         };
 
-        // 1.x - кол-во палуб;
-        // x.1 - номер;
-
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //frm1.frm3.Close();
+        }
 
         public Form2(Form1 frm1)
         {
@@ -45,7 +48,8 @@ namespace SeaBattleV3
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            arr2 = frm1.distribution(arr2, n, ships);
+            //frm1.distribution(arr2, n, ships);
+            frm1.shipsAdd(ref arr2, n, ships);
 
             if (frm1.textBox1.Text == "")
                 frm1.textBox1.Text = "Player1";

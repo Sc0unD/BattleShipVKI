@@ -86,165 +86,180 @@ namespace SeaBattleV3
             MessageBox.Show(File.ReadAllText("Materials\\info.txt"), "Помощь");
         }
 
-        public double[,] distribution(double [,] arr,int n,List<double> ships)
+        public void shipsAdd(ref double[,] arr, int n, List<double> ships)
         {
-            int dir, i0 = 0, j0 = 0, f = 0;
-            bool flag;
-            while (f < ships.Count)
+            int i0, j0, dir;
+            bool shipPlaced;
+
+            foreach(var ship in ships)
             {
-                flag = true;
-                dir = rnd.Next(0,2);
-
-
-                try
+                dir = rnd.Next(2); // 0 -> vertical  1 -> horizontal
+                shipPlaced = false;
+                while (!shipPlaced)
                 {
                     if (dir == 0)
                     {
-                        i0 = rnd.Next(0, n - (int)ships[f] + 1);
-                        j0 = rnd.Next(0, n);
-                        for (int i = i0 - 1; i <= i0 + (int)ships[f]; i++)
-                        {
-                            for (int j = j0 - 1; j <= j0+1; j++)
-                            {
-                                if (arr[i, j] != 0)
-                                    flag = false;
-                                
-                            }
-                            
-                        }
-
-                        if (flag)
-                        {
-                            for (int i = i0; i < i0 + (int)ships[f]; i++)
-                            {
-                                arr[i, j0] = ships[f];
-                            }
-                            
-                        }
+                        i0 = rnd.Next(n - (int)ship + 1);
+                        j0 = rnd.Next(n);
                     }
-
-                    if (dir == 1)
+                    else
                     {
-                        j0 = rnd.Next(0,n - (int)ships[f] + 1);
-                        i0 = rnd.Next(0,n);
-                        for (int j = j0 - 1; j <= j0 + (int)ships[f]; j++)
-                        {
-                            for (int i = i0 - 1; i <= i0 + 1; i++)
-                            {
-                                if (arr[i, j] != 0)
-                                    flag = false;
-                            }
-                            
-                        }
-
-                        if (flag)
-                        {
-                            for (int j = j0; j < j0 + (int)ships[f]; j++)
-                            {
-                                arr[i0, j] = ships[f];
-                            }
-                            
-                        }
+                        i0 = rnd.Next(n);
+                        j0 = rnd.Next(n - (int)ship + 1);
                     }
-
-                    if (flag)
+                    if (!canPlaceShip(arr,n,i0,j0,dir,ship))
                     {
-                        f++;
+                        continue;
                     }
-                
+
+                    placeShip(ref arr ,ship, i0, j0, dir);
+                    shipPlaced = true;
                 }
-                catch (IndexOutOfRangeException) 
-                {
-                    continue;
-                }      
+                
+                
+                
             }
-            return arr;
         }
-        //public double[,] distribution(double[,] arr, int n, List<double> ships)
+
+        bool canPlaceShip(double[,] arr, int n, int ib, int jb, int dir, double ship)
+        {
+            int lim1 = 1, lim2 = 1, lim3 = 1, lim4 = 1; /// lim1 -> i up, lim2 -> i down, lim3 -> j left, lim4 -> j right
+
+            if (dir == 0)
+            {
+                if (ib - 1 < 0)
+                    lim1 = 0;
+                if (ib + (int)ship >= n)
+                    lim2 = 0;
+                if (jb - 1 < 0)
+                    lim3 = 0;
+                if (jb + 1 >= n)
+                    lim4 = 0;
+
+                for (int i = ib - lim1; i < ib + (int)ship + lim2; i++)
+                {
+                    for (int j = jb - lim3; j <= jb + lim4; j++)
+                    {
+                        if (arr[i, j] != 0)
+                            return false;
+                    }
+
+                }
+            }
+
+            else
+            {
+                if (ib - 1 < 0)
+                    lim1 = 0;
+                if (ib + 1 >= n)
+                    lim2 = 0;
+                if (jb - 1 < 0)
+                    lim3 = 0;
+                if (jb + (int)ship >= n)
+                    lim4 = 0;
+
+                for (int i = ib - lim1; i <= ib + lim2 ; i++)
+                {
+                    for (int j = jb - lim3; j < jb + (int)ship + lim4; j++)
+                    {
+                        if (arr[i, j] != 0)
+                            return false;
+                    }
+
+                }
+            }
+
+            return true;
+        }
+
+        void placeShip(ref double[,] arr, double ship, int i0, int j0, int dir)
+        {
+            if (dir == 0)
+            {
+                for (int i = i0; i < i0 + (int)ship; i++)
+                {
+                    arr[i, j0] = ship;
+                }
+            }
+            else 
+                for (int j = j0; j < j0 + (int)ship; j++)
+                {
+                    arr[i0, j] = ship;
+                }
+        }
+
+        //public double[,] distribution(double [,] arr,int n,List<double> ships)
         //{
-        //    int dir, i0, j0, f = 0, num1, num2;
-        //    //double cur;
+        //    int dir, i0 = 0, j0 = 0, f = 0;
         //    bool flag;
         //    while (f < ships.Count)
         //    {
         //        flag = true;
-        //        //cur = ships[f];
-        //        dir = rnd.Next(2);
-        //        i0 = rnd.Next(n);
-        //        j0 = rnd.Next(n);
+        //        dir = rnd.Next(0,2);
 
 
-        //        if (dir == 0)
+        //        try
         //        {
-        //            num1 = 1;
-        //            num2 = 1;
-        //            if (i0 + (int)ships[f] >= n)
-        //                continue;
-        //            if (i0 + (int)ships[f] + 1 == n)
-        //                num1 = 0;
-        //            if (i0 - 1 < 0)
-        //                num2 = 0;
-
-        //            for (int i = i0 - num2; i < i0 + (int)ships[f] + num1; i++)
+        //            if (dir == 0)
         //            {
-        //                for (int j = j0 - 1; j <= j0 + 1; j++)
+        //                i0 = rnd.Next(0, n - (int)ships[f] + 1);
+        //                j0 = rnd.Next(0, n);
+        //                for (int i = i0 - 1; i <= i0 + (int)ships[f]; i++)
         //                {
-        //                    if (arr[i, j] != 0)
-        //                        flag = false;
-
+        //                    for (int j = j0 - 1; j <= j0+1; j++)
+        //                    {
+        //                        if (arr[i, j] != 0)
+        //                            flag = false;
+                                
+        //                    }
+                            
         //                }
 
+        //                if (flag)
+        //                {
+        //                    for (int i = i0; i < i0 + (int)ships[f]; i++)
+        //                    {
+        //                        arr[i, j0] = ships[f];
+        //                    }
+                            
+        //                }
+        //            }
+
+        //            if (dir == 1)
+        //            {
+        //                j0 = rnd.Next(0,n - (int)ships[f] + 1);
+        //                i0 = rnd.Next(0,n);
+        //                for (int j = j0 - 1; j <= j0 + (int)ships[f]; j++)
+        //                {
+        //                    for (int i = i0 - 1; i <= i0 + 1; i++)
+        //                    {
+        //                        if (arr[i, j] != 0)
+        //                            flag = false;
+        //                    }
+                            
+        //                }
+
+        //                if (flag)
+        //                {
+        //                    for (int j = j0; j < j0 + (int)ships[f]; j++)
+        //                    {
+        //                        arr[i0, j] = ships[f];
+        //                    }
+                            
+        //                }
         //            }
 
         //            if (flag)
         //            {
-        //                for (int i = i0; i < i0 + (int)ships[f]; i++)
-        //                {
-        //                    arr[i, j0] = ships[f];
-        //                }
-
+        //                f++;
         //            }
+                
         //        }
-
-        //        if (dir == 1)
+        //        catch (IndexOutOfRangeException) 
         //        {
-        //            num1 = 1;
-        //            num2 = 1;
-        //            if (j0 + (int)ships[f] >= n)
-        //                continue;
-        //            if (j0 + (int)ships[f] + 1 >= n)
-        //                num1 = 0;
-        //            for (int j = j0 - 1; j < j0 + (int)ships[f] + num1; j++)
-        //            {
-        //                for (int i = i0 - 1; i <= i0 + 1; i++)
-        //                {
-        //                    if (arr[i, j] != 0)
-        //                        flag = false;
-        //                }
-
-        //            }
-
-        //            if (flag)
-        //            {
-        //                for (int j = j0; j < j0 + (int)ships[f]; j++)
-        //                {
-        //                    arr[i0, j] = ships[f];
-        //                }
-
-        //            }
-        //        }
-
-        //        if (flag)
-        //        {
-        //            f++;
-        //        }
-
-
-
+        //            continue;
+        //        }      
         //    }
-
-
-
         //    return arr;
         //}
 

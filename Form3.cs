@@ -20,6 +20,11 @@ namespace SeaBattleV3
         public Button[,] bArr1 = new Button[n, n];
         public Button[,] bArr2 = new Button[n, n];
 
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //frm1.frm2.Close();
+        }
+
         List<double> ships = new()
         {
             4.1,
@@ -43,7 +48,8 @@ namespace SeaBattleV3
         }
         private void Form3_Load(object sender, EventArgs e)
         {
-            arr2 = frm1.distribution(arr2, n, ships);
+            //arr2 = frm1.distribution(arr2, n, ships);
+            frm1.shipsAdd(ref arr2, n, ships);
 
             if (frm1.textBox2.Text == "")
                 frm1.textBox2.Text = "Player2";
