@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label3
@@ -88,6 +90,11 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Ваш ход";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -100,8 +107,8 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form3";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -115,5 +122,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.Label label6;
+        public System.Windows.Forms.Timer timer1;
     }
 }

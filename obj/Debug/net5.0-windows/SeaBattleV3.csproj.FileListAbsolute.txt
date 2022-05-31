@@ -109,3 +109,4 @@ D:\Projects\BattleShipVKI1\obj\Debug\net5.0-windows\refint\SeaBattleV3.dll
 D:\Projects\BattleShipVKI1\obj\Debug\net5.0-windows\SeaBattleV3.pdb
 D:\Projects\BattleShipVKI1\obj\Debug\net5.0-windows\SeaBattleV3.genruntimeconfig.cache
 D:\Projects\BattleShipVKI1\obj\Debug\net5.0-windows\ref\SeaBattleV3.dll
+D:\Projects\BattleShipVKI1\obj\Debug\net5.0-windows\SeaBattleV3.Form4.resources

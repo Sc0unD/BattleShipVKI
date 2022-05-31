@@ -32,15 +32,12 @@ namespace SeaBattleV3
             // x.1 - номер;
         };
 
-        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //frm1.frm3.Close();
-        }
-
-        public Form2(Form1 frm1)
+        public Form2(Form1 fr1)
         {
             InitializeComponent();
-            this.frm1 = frm1;
+            this.frm1 = fr1;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(100, 1080 / 2 - (int)(this.Height / 1.5)); 
             this.Width = 812;
             this.Height = 514;
             
@@ -112,62 +109,58 @@ namespace SeaBattleV3
             j0 = (bt.Left - x0) / h;
 
 
-            if (!frm1.compflag)
+            if (frm1.hod == 0 && arr1[i0, j0] == -1)
             {
-                if (frm1.hod == 0 && arr1[i0, j0] == -1)
+                //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
+                //bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
+                if (frm1.frm3.arr2[i0, j0] == 0)
                 {
-                    //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
-                    //bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
-                    if (frm1.frm3.arr2[i0, j0] == 0)
+                    bArr1[i0, j0].BackColor = Color.Aqua;
+                    frm1.frm3.bArr2[i0, j0].BackColor = Color.SkyBlue;
+                    arr1[i0, j0] = 0;
+                    frm1.hod = 1;
+                    label6.Text = "Ход противника";
+                    frm1.frm3.label6.Text = "Ваш ход";
+                    if (frm1.compflag)
                     {
-                        bArr1[i0, j0].BackColor = Color.Aqua;
-                        frm1.frm3.bArr2[i0, j0].BackColor = Color.SkyBlue;
-                        arr1[i0, j0] = 0;
-                        frm1.hod = 1;
-                        label6.Text = "Ход противника";
-                        frm1.frm3.label6.Text = "Ваш ход";
-
+                        frm1.frm3.timer1.Enabled = true;
                     }
                     else
                     {
-                        bArr1[i0, j0].BackColor = Color.Crimson;
-                        frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
-                        arr1[i0, j0] = 1;
+                        //this.Hide();
+                        //Thread.Sleep(2000);
+                        //frm1.frm3.Show();
                     }
 
-                    frm1.frm3.arr2[i0, j0] = -1;
-
-
-
-                    //this.Hide();
-                    //Thread.Sleep(2000);
-                    //frm1.frm3.Show();
                 }
-
+                else
+                {
+                    bArr1[i0, j0].BackColor = Color.Crimson;
+                    frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
+                    arr1[i0, j0] = 1;
+                }
+                frm1.frm3.arr2[i0, j0] = -1;
+                
             }
+
 
 
             if (frm1.lose(frm1.frm3.arr2, n))
             {
-                dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 frm1.writeToMatchesFile(this.Text);
+                dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 this.Close();
                 frm1.frm3.Close();
 
                 if (dg == DialogResult.Yes)
                 {
                     frm1.hod = new Random().Next(2);
-                    frm1.button1_Click(sender, new EventArgs());
+                    if (!frm1.compflag)
+                        frm1.button1_Click(sender, new EventArgs());
+                    else
+                        frm1.button2_Click(sender, new EventArgs());
                 }
             }
-
-
-
         }
-
-        
-
     }
-
-
 }

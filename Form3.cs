@@ -15,35 +15,28 @@ namespace SeaBattleV3
     {
         public Form1 frm1;
         const int n = 10;
-        int x0 = 30, y0 = 45, h = 32, xd = 396;
+        int x0 = 30, y0 = 45, h = 32, xd = 396, ic, jc;
         public double[,] arr1 = new double[n, n], arr2 = new double[n, n];
         public Button[,] bArr1 = new Button[n, n];
         public Button[,] bArr2 = new Button[n, n];
-
-        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //frm1.frm2.Close();
-        }
+        Random rnd = new Random();
 
         List<double> ships = new()
         {
-            4.1,
-            3.1,
-            3.2,
-            2.1,
-            2.2,
-            2.3,
-            1.1,
-            1.2,
-            1.3,
-            1.4
+            4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
         };
-        public Form3(Form1 frm1)
+
+        
+
+        public Form3(Form1 fr1)
         {
             InitializeComponent();
-            this.frm1 = frm1;
+            this.frm1 = fr1;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(1920 - 100 - this.Width, 1080 / 2 - (int)(this.Height / 1.5));
             this.Width = 812;
             this.Height = 514;
+            timer1.Interval = 10;
 
         }
         private void Form3_Load(object sender, EventArgs e)
@@ -101,16 +94,6 @@ namespace SeaBattleV3
                     Controls.Add(bArr2[i, j]);
                 }
             }
-            //arr2[0, 0] = 1;
-            //bArr2[0, 0].Text = arr2[0, 0].ToString();
-            //arr2[1, 1] = 1;
-            //bArr2[1, 1].Text = arr2[1, 1].ToString();
-            //arr2[2, 2] = 1;
-            //bArr2[2, 2].Text = arr2[2, 2].ToString();
-            //arr2[3, 3] = 1;
-            //bArr2[3, 3].Text = arr2[3, 3].ToString();
-            //arr2[4, 4] = 1;
-            //bArr2[4, 4].Text = arr2[4, 4].ToString();
         }
         public void bt_Click(object sender, EventArgs e)
         {
@@ -135,6 +118,7 @@ namespace SeaBattleV3
                     arr1[i0, j0] = 0;
                     label6.Text = "Ход противника";
                     frm1.frm2.label6.Text = "Ваш ход";
+                    timer1.Enabled = false;
                 }
                 else
                 {
@@ -152,18 +136,41 @@ namespace SeaBattleV3
 
             if (frm1.lose(frm1.frm2.arr2, n))
             {
-                dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (frm1.compflag)
+                    timer1.Enabled = false;
                 frm1.writeToMatchesFile(this.Text);
+                dg = MessageBox.Show($"Победил {this.Text}, хотите сыграть еще раз?", "Победа", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 this.Close();
                 frm1.frm2.Close();
 
                 if (dg == DialogResult.Yes)
                 {
                     frm1.hod = new Random().Next(2);
-                    frm1.button1_Click(sender, new EventArgs());
+                    if (!frm1.compflag)
+                        frm1.button1_Click(sender, new EventArgs());
+                    else
+                        frm1.button2_Click(sender, new EventArgs());
                 }
             }
+        }
 
+        public void hodForComp(ref int i, ref int j)
+        {
+            //int i, j;
+            //Thread.Sleep(1200);
+
+            while (arr1[i = rnd.Next(n), j = rnd.Next(n)] != -1)
+            {
+                ;
+            }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (frm1.hod == 1 && frm1.compflag)
+            {
+                hodForComp(ref ic, ref jc);
+                bt_Click(bArr1[ic, jc], new EventArgs());
+            }
         }
 
     }

@@ -15,16 +15,16 @@ namespace SeaBattleV3
     {
         public Form2 frm2;
         public Form3 frm3;
+        public Form4 frm4;
         public int hod;
         public bool compflag;
         Random rnd = new();
-        //int btclick;
-
 
         public Form1()
         {
             InitializeComponent();
             hod = rnd.Next(2);
+            this.StartPosition = FormStartPosition.CenterScreen;
 
         }
 
@@ -52,23 +52,24 @@ namespace SeaBattleV3
             }
             else if (compflag)
             {
+                //frm3.Hide();
+                hod = 0;
                 frm2.label6.Text = "Ваш ход";
+                frm3.Text = "Computer";
                 //frm3.label6.Text = "Ход противника";
-                frm3.Hide();
+                
             }
         }
 
         public void button1_Click(object sender, EventArgs e)
         {
-            //btclick = 1;
             compflag = false;
             load(); 
            
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void button2_Click(object sender, EventArgs e)
         {
-            //btclick = 2;
             compflag = true;
             
             load();
@@ -188,81 +189,6 @@ namespace SeaBattleV3
                 }
         }
 
-        //public double[,] distribution(double [,] arr,int n,List<double> ships)
-        //{
-        //    int dir, i0 = 0, j0 = 0, f = 0;
-        //    bool flag;
-        //    while (f < ships.Count)
-        //    {
-        //        flag = true;
-        //        dir = rnd.Next(0,2);
-
-
-        //        try
-        //        {
-        //            if (dir == 0)
-        //            {
-        //                i0 = rnd.Next(0, n - (int)ships[f] + 1);
-        //                j0 = rnd.Next(0, n);
-        //                for (int i = i0 - 1; i <= i0 + (int)ships[f]; i++)
-        //                {
-        //                    for (int j = j0 - 1; j <= j0+1; j++)
-        //                    {
-        //                        if (arr[i, j] != 0)
-        //                            flag = false;
-                                
-        //                    }
-                            
-        //                }
-
-        //                if (flag)
-        //                {
-        //                    for (int i = i0; i < i0 + (int)ships[f]; i++)
-        //                    {
-        //                        arr[i, j0] = ships[f];
-        //                    }
-                            
-        //                }
-        //            }
-
-        //            if (dir == 1)
-        //            {
-        //                j0 = rnd.Next(0,n - (int)ships[f] + 1);
-        //                i0 = rnd.Next(0,n);
-        //                for (int j = j0 - 1; j <= j0 + (int)ships[f]; j++)
-        //                {
-        //                    for (int i = i0 - 1; i <= i0 + 1; i++)
-        //                    {
-        //                        if (arr[i, j] != 0)
-        //                            flag = false;
-        //                    }
-                            
-        //                }
-
-        //                if (flag)
-        //                {
-        //                    for (int j = j0; j < j0 + (int)ships[f]; j++)
-        //                    {
-        //                        arr[i0, j] = ships[f];
-        //                    }
-                            
-        //                }
-        //            }
-
-        //            if (flag)
-        //            {
-        //                f++;
-        //            }
-                
-        //        }
-        //        catch (IndexOutOfRangeException) 
-        //        {
-        //            continue;
-        //        }      
-        //    }
-        //    return arr;
-        //}
-
         public bool lose(double[,] arr, int n)
         {
             for (int i = 0; i<n; i++)
@@ -283,7 +209,13 @@ namespace SeaBattleV3
 
         public void writeToMatchesFile(string name)
         {
-            File.AppendAllText("Materials\\match_results.txt", $"№{File.ReadAllLines("Materials\\match_results.txt").Length + 1} -- {textBox1.Text}:{textBox2.Text} -> победил {name}\n");
+            File.AppendAllText("Materials\\match_results.txt", $"№{File.ReadAllLines("Materials\\match_results.txt").Length + 1} -- {frm2.Text} vs {frm3.Text} -- Победил {name}\n");
+        }
+
+        public void close()
+        {
+            frm2.Close();
+            frm3.Close();
         }
 
     }
