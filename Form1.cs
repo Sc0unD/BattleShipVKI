@@ -218,5 +218,121 @@ namespace SeaBattleV3
             frm3.Close();
         }
 
+        //public bool killOrNot(double[,] arr, int i0, int j0, int n) //true - kill, false - hit;
+        //{
+        //    for (int i = i0 - 1; i <= i0 + 1; i++)
+        //    {
+        //        for (int j = j0 - 1; j <= j0 + 1; j++)
+        //        {
+        //            if (i < 0 || i > n - 1 || j < 0 || j > n - 1 || (i == i0 && j == j0))
+        //                continue;
+
+        //                if (arr[i, j] == arr[i0, j0])
+        //                    return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        public bool killOrNot(double[,] arr, int i0, int j0, int n) //true - kill, false - hit;
+        {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (i == i0 && j == j0)
+                        continue;
+
+                    if (arr[i, j] == arr[i0, j0])
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public void paintIfKill(ref double[,] arr1, ref double[,] arr2, ref Button[,] bArr1, ref Button[,] bArr2, int i0, int j0) // 1 - active form; 2 - second form
+        {
+            int ic = -1, jc = -1;
+            while (1 == 1)
+            {
+                for (int i = i0 - 1; i <= i0 + 1; i++)
+                {
+                    for (int j = j0 - 1; j <= j0 + 1; j++)
+                    {
+                        try
+                        {
+                            if (i == i0 && j == j0)
+                                continue;
+                            if (Math.Abs(arr2[i, j]) == Math.Abs(arr2[i0, j0]))
+                            {
+                                ic = i;
+                                jc = j;
+                                //paintIfKill(ref arr1, ref arr2, ref bArr1, ref bArr2, i,j)
+
+                                //arr2[i0, j0] *= -1;
+                                //arr1[i0, j0] = arr2[i0, j0];
+                            }
+                            else if (arr2[i,j] == 0)
+                            {
+                                bArr1[i, j].BackColor = Color.Aqua;
+                                bArr2[i, j].BackColor = Color.SkyBlue;
+                            }
+                            
+                        }
+                        catch {; }
+                        
+                    }
+                }
+                arr1[i0, j0] = -5.0;
+                arr2[i0, j0] = -5.0;
+                bArr1[i0, j0].BackColor = Color.Crimson;
+                bArr2[i0, j0].BackColor = Color.Crimson;
+                if ((i0 == ic && j0 == jc) || (ic < 0 && jc < 0))
+                    break;
+
+                i0 = ic;
+                j0 = jc;
+
+                
+            }
+
+        }
+        //public void paintIfKill(ref double[,] arr1, ref double[,] arr2, ref Button[,] bArr1, ref Button[,] bArr2, int i0, int j0) // 1 - active form; 2 - second form
+        //{
+        //    int ic = -1, jc = -1;
+        //    double f = arr2[i0, j0];
+        //    //while (1 == 1)
+        //    //{
+        //    for (int i = i0 - 1; i <= i0 + 1; i++)
+        //    {
+        //        for (int j = j0 - 1; j <= j0 + 1; j++)
+        //        {
+        //            try
+        //            {
+        //                if (i == i0 && j == j0)
+        //                    continue;
+        //                if (Math.Abs(arr2[i, j]) == Math.Abs(f))
+        //                {
+        //                    ic = i;
+        //                    jc = j;
+        //                    arr1[i0, j0] = -5.0;
+        //                    arr2[i0, j0] = -5.0;
+        //                    bArr1[i0, j0].BackColor = Color.Crimson;
+        //                    bArr2[i0, j0].BackColor = Color.Crimson;
+        //                    paintIfKill(ref arr1, ref arr2, ref bArr1, ref bArr2, ic, jc);
+        //                }
+        //                else if (arr2[i, j] == 0)
+        //                {
+        //                    bArr1[i, j].BackColor = Color.Aqua;
+        //                    bArr2[i, j].BackColor = Color.SkyBlue;
+        //                }
+
+        //            }
+        //            catch {; }
+
+        //        }
+        //    }
+        //}
+
     }
 }

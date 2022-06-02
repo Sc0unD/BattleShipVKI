@@ -17,11 +17,9 @@ namespace SeaBattleV3
     {
         public Form1 frm1;
         const int n = 10;
-        int x0 = 30, y0 = 45, h = 34, xd = 396;
-        public double[,] arr1 = new double[n, n];
-        public double[,] arr2 = new double[n, n];      
-        public Button [,] bArr1 = new Button[n, n];
-        public Button[,] bArr2 = new Button[n, n];
+        int x0 = 30, y0 = 35, h = 34, xd = 396;
+        public double[,] arr1 = new double[n, n], arr2 = new double[n, n];      
+        public Button [,] bArr1 = new Button[n, n], bArr2 = new Button[n, n];
 
         Random rnd = new Random();
 
@@ -40,7 +38,11 @@ namespace SeaBattleV3
             this.Location = new Point(100, 1080 / 2 - (int)(this.Height / 1.5)); 
             this.Width = 812;
             this.Height = 514;
-            
+            label6.Location = new Point(12,this.Height - 56 - label6.Height);
+            label3.Location = new Point(this.Width - 30 - label3.Width, this.Height - 56 - label3.Height);
+            label1.Location = new Point(this.Width - 30 - label1.Width, label3.Location.Y - 10 - label1.Height);
+            label2.Location = new Point(this.Width - 30 - label2.Width, label1.Location.Y - 10 - label2.Height);
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -52,16 +54,16 @@ namespace SeaBattleV3
                 frm1.textBox1.Text = "Player1";
             this.Text = frm1.textBox1.Text;
 
-            label4.Top = 15;
+            label4.Top = 10;
             label4.Left = x0;
-            label5.Top = 15;
+            label5.Top = 10;
             label5.Left = x0 + xd;
 
             for (int i = 0; i < n; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < n; j++) //0 -> unknown; [-1;-4] -> ship; -5 -> shot area 
                 {
-                    arr1[i, j] = -1;
+                    arr1[i, j] = 0;
                     bArr1[i, j] = new Button();
                     //bArr1[i, j].Text = arr1[i, j].ToString();
                     bArr1[i, j].Width = h;
@@ -109,7 +111,7 @@ namespace SeaBattleV3
             j0 = (bt.Left - x0) / h;
 
 
-            if (frm1.hod == 0 && arr1[i0, j0] == -1)
+            if (frm1.hod == 0 && arr1[i0, j0] == 0)
             {
                 //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
                 //bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
@@ -117,7 +119,8 @@ namespace SeaBattleV3
                 {
                     bArr1[i0, j0].BackColor = Color.Aqua;
                     frm1.frm3.bArr2[i0, j0].BackColor = Color.SkyBlue;
-                    arr1[i0, j0] = 0;
+                    arr1[i0, j0] = -6.0;
+                    frm1.frm3.arr2[i0, j0] = -6.0;
                     frm1.hod = 1;
                     label6.Text = "Ход противника";
                     frm1.frm3.label6.Text = "Ваш ход";
@@ -135,11 +138,25 @@ namespace SeaBattleV3
                 }
                 else
                 {
-                    bArr1[i0, j0].BackColor = Color.Crimson;
-                    frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
-                    arr1[i0, j0] = 1;
+                    if (frm1.killOrNot(frm1.frm3.arr2, i0, j0, n))
+                    {
+                        //frm1.frm3.arr2[i0, j0] = -5.0;
+                        //bArr1[i0, j0].BackColor = Color.Crimson;
+                        //frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
+                        frm1.paintIfKill(ref arr1, ref frm1.frm3.arr2, ref bArr1, ref frm1.frm3.bArr2, i0, j0);
+                    }
+                    else
+                    {
+                        frm1.frm3.arr2[i0, j0] *= -1;
+                        arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
+                        bArr1[i0, j0].BackColor = Color.DarkOrange;
+                        frm1.frm3.bArr2[i0, j0].BackColor = Color.DarkOrange;
+                    }
+                    //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
+                    //arr2[i0, j0] = frm1.frm3.arr2[i0, j0];
+
                 }
-                frm1.frm3.arr2[i0, j0] = -1;
+                //frm1.frm3.arr2[i0, j0] = -1;
                 
             }
 

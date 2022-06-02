@@ -15,10 +15,10 @@ namespace SeaBattleV3
     {
         public Form1 frm1;
         const int n = 10;
-        int x0 = 30, y0 = 45, h = 32, xd = 396, ic, jc;
+        int x0 = 30, y0 = 35, h = 34, xd = 396, ic, jc;
         public double[,] arr1 = new double[n, n], arr2 = new double[n, n];
-        public Button[,] bArr1 = new Button[n, n];
-        public Button[,] bArr2 = new Button[n, n];
+        public Button[,] bArr1 = new Button[n, n], bArr2 = new Button[n, n];
+
         Random rnd = new Random();
 
         List<double> ships = new()
@@ -37,6 +37,10 @@ namespace SeaBattleV3
             this.Width = 812;
             this.Height = 514;
             timer1.Interval = 10;
+            label6.Location = new Point(12, this.Height - 56 - label6.Height);
+            label3.Location = new Point(this.Width - 30 - label3.Width, this.Height - 56 - label3.Height);
+            label1.Location = new Point(this.Width - 30 - label1.Width, label3.Location.Y - 10 - label1.Height);
+            label2.Location = new Point(this.Width - 30 - label2.Width, label1.Location.Y - 10 - label2.Height);
 
         }
         private void Form3_Load(object sender, EventArgs e)
@@ -115,19 +119,43 @@ namespace SeaBattleV3
                     bArr1[i0, j0].BackColor = Color.Aqua;
                     frm1.frm2.bArr2[i0, j0].BackColor = Color.SkyBlue;
                     frm1.hod = 0;
-                    arr1[i0, j0] = 0;
+                    arr1[i0, j0] = -6.0;
+                    frm1.frm2.arr2[i0, j0] = -6.0;
                     label6.Text = "Ход противника";
                     frm1.frm2.label6.Text = "Ваш ход";
-                    timer1.Enabled = false;
+                    if (frm1.compflag)
+                    {
+                        timer1.Enabled = false;
+                    }
+                    else
+                    {
+                        //this.Hide();
+                        //Thread.Sleep(2000);
+                        //frm1.frm3.Show();
+                    }
                 }
                 else
                 {
-                    bArr1[i0, j0].BackColor = Color.Crimson;
-                    frm1.frm2.bArr2[i0, j0].BackColor = Color.Crimson;
-                    arr1[i0, j0] = 1;
+                    //bArr1[i0, j0].BackColor = Color.Crimson;
+                    //frm1.frm2.bArr2[i0, j0].BackColor = Color.Crimson;
+                    //arr1[i0, j0] = 1;
+                    if (frm1.killOrNot(frm1.frm2.arr2, i0, j0, n))
+                    {
+                        //frm1.frm3.arr2[i0, j0] = -5.0;
+                        //bArr1[i0, j0].BackColor = Color.Crimson;
+                        //frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
+                        frm1.paintIfKill(ref arr1, ref frm1.frm2.arr2, ref bArr1, ref frm1.frm2.bArr2, i0, j0);
+                    }
+                    else
+                    {
+                        frm1.frm2.arr2[i0, j0] *= -1;
+                        arr1[i0, j0] = frm1.frm2.arr2[i0, j0];
+                        bArr1[i0, j0].BackColor = Color.DarkOrange;
+                        frm1.frm2.bArr2[i0, j0].BackColor = Color.DarkOrange;
+                    }
                 }
 
-                frm1.frm2.arr2[i0, j0] = -1;
+                //frm1.frm2.arr2[i0, j0] = -1;
                 //this.Hide();
                 //Thread.Sleep(2000);
                 //frm1.frm2.Show();
