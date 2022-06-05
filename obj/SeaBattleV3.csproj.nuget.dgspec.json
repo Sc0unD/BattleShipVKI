@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\BattleShipVKI1\\SeaBattleV3.csproj": {}
+    "D:\\Projects\\BattleShipVKI\\SeaBattleV3.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\BattleShipVKI1\\SeaBattleV3.csproj": {
+    "D:\\Projects\\BattleShipVKI\\SeaBattleV3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\BattleShipVKI1\\SeaBattleV3.csproj",
+        "projectUniqueName": "D:\\Projects\\BattleShipVKI\\SeaBattleV3.csproj",
         "projectName": "SeaBattleV3",
-        "projectPath": "D:\\Projects\\BattleShipVKI1\\SeaBattleV3.csproj",
+        "projectPath": "D:\\Projects\\BattleShipVKI\\SeaBattleV3.csproj",
         "packagesPath": "C:\\Users\\Nikita\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\BattleShipVKI1\\obj\\",
+        "outputPath": "D:\\Projects\\BattleShipVKI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nikita\\AppData\\Roaming\\NuGet\\NuGet.Config",

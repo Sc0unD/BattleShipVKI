@@ -144,7 +144,7 @@ namespace SeaBattleV3
                         //frm1.frm3.arr2[i0, j0] = -5.0;
                         //bArr1[i0, j0].BackColor = Color.Crimson;
                         //frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
-                        frm1.paintIfKill(ref arr1, ref frm1.frm2.arr2, ref bArr1, ref frm1.frm2.bArr2, i0, j0);
+                        frm1.paintIfKill(ref arr1, ref frm1.frm2.arr2, ref bArr1, ref frm1.frm2.bArr2, i0, j0, n);
                     }
                     else
                     {

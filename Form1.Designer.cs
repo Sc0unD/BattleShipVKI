@@ -39,7 +39,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.допПараметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьФайлСИсториейМатчейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -138,6 +142,32 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.допПараметрыToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(921, 28);
+            this.menuStrip1.TabIndex = 10;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // допПараметрыToolStripMenuItem
+            // 
+            this.допПараметрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.очиститьФайлСИсториейМатчейToolStripMenuItem});
+            this.допПараметрыToolStripMenuItem.Name = "допПараметрыToolStripMenuItem";
+            this.допПараметрыToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
+            this.допПараметрыToolStripMenuItem.Text = "Доп. параметры";
+            // 
+            // очиститьФайлСИсториейМатчейToolStripMenuItem
+            // 
+            this.очиститьФайлСИсториейМатчейToolStripMenuItem.Name = "очиститьФайлСИсториейМатчейToolStripMenuItem";
+            this.очиститьФайлСИсториейМатчейToolStripMenuItem.Size = new System.Drawing.Size(330, 26);
+            this.очиститьФайлСИсториейМатчейToolStripMenuItem.Text = "Очистить файл с историей матчей";
+            this.очиститьФайлСИсториейМатчейToolStripMenuItem.Click += new System.EventHandler(this.очиститьФайлСИсториейМатчейToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -153,11 +183,15 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Menu";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,5 +209,8 @@
         public System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem допПараметрыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem очиститьФайлСИсториейМатчейToolStripMenuItem;
     }
 }

@@ -1,6 +1,1 @@
 №1 -- Player1 vs Player2 -- Победил Player1
-№2 -- Player1 vs Player2 -- Победил Player1
-№3 -- Player1 vs Player2 -- Победил Player1
-№4 -- Player1 vs Player2 -- Победил Player2
-№5 -- Player1 vs Player2 -- Победил Player1
-№6 -- Player1 vs Player2 -- Победил Player2
