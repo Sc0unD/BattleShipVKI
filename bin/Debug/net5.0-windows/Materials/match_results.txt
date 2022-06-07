@@ -1,1 +1,2 @@
 №1 -- Player1 vs Player2 -- Победил Player1
+№2 -- Player1 vs Player2 -- Победил Player2

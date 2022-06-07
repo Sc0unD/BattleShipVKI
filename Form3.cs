@@ -26,7 +26,6 @@ namespace SeaBattleV3
             4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
         };
 
-        
 
         public Form3(Form1 fr1)
         {
@@ -61,7 +60,7 @@ namespace SeaBattleV3
             {
                 for (int j = 0; j < n; j++)
                 {
-                    arr1[i, j] = -1;
+                    arr1[i, j] = 0;
                     bArr1[i, j] = new Button();
                     //bArr1[i, j].Text = arr1[i, j].ToString();
                     bArr1[i, j].Width = h;
@@ -109,7 +108,7 @@ namespace SeaBattleV3
             j0 = (bt.Left - x0) / h;
             
 
-            if (frm1.hod == 1 && arr1[i0,j0] == -1)
+            if (frm1.hod == 1 && arr1[i0,j0] == 0)
             {
                 //arr1[i0, j0] = frm1.frm2.arr2[i0, j0];
                 //bArr1[i0, j0].Text = frm1.frm2.bArr2[i0, j0].Text;
@@ -184,14 +183,157 @@ namespace SeaBattleV3
 
         public void hodForComp(ref int i, ref int j)
         {
-            //int i, j;
             //Thread.Sleep(1200);
+            i = j = 0;
+            int dir = 0;
+            bool flag = false, flag_dir = false;
 
-            while (arr1[i = rnd.Next(n), j = rnd.Next(n)] != -1)
+            for (int ic = 0; ic < n; ic++)
             {
-                ;
+                for (int jc = 0; jc < n; jc++)
+                {
+                    if (arr1[ic, jc] < 0 && arr1[ic,jc] > -5.0)
+                    {
+                        i = ic;
+                        j = jc;
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag)
+                    break;
+            }
+
+            //if (flag)
+            //{
+            //    if (j > 0 && j < n)
+            //    {
+            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j - 1]))    // 1 -> left; 2 -> right; 3 -> up; 4 -> down;
+            //        {
+            //            dir = rnd.Next(1, 3);
+            //            flag_dir = true;
+            //        }
+            //    }
+            //    // else if (j == 0)
+            //    if (i > 0 && i < n)
+            //    {
+            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i - 1, j]))
+            //        {
+            //            dir = rnd.Next(3, 4);
+            //            flag_dir = true;
+            //        }
+            //    }
+
+            //    if (j < n - 1 && j >= 0)
+            //    {
+            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j + 1]))
+            //        {
+            //            dir = rnd.Next(1, 3);
+            //            flag_dir = true;
+            //        }
+            //    }
+
+            //    if (i < n && i >= 0)
+            //    {   
+
+
+            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, i + 1]))
+            //        {
+            //            dir = rnd.Next(3, 5);
+            //            flag_dir = true;
+            //        }
+            //    }
+            //    if (!flag_dir)
+            //        dir = rnd.Next(1, 5);
+            //}
+
+            if (i >= 0 && j >= 0 && i < n && j < n && flag)
+            {
+                try 
+                {
+                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j - 1]))    // 1 -> left; 2 -> right; 3 -> up; 4 -> down;
+                    {
+                        dir = rnd.Next(1, 3);
+                        flag_dir = true;
+                    }
+                
+                }
+                catch { dir = 2; flag_dir = true; }
+                
+                try
+                {
+                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i - 1, j]))
+                    {
+                        dir = rnd.Next(3, 5);
+                        flag_dir = true;
+                    }
+                }
+                catch { dir = 3; flag_dir = true; }
+
+                try
+                {
+                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j + 1]))
+                    {
+                        dir = rnd.Next(1, 3);
+                        flag_dir = true;
+                    }
+                }
+                catch { dir = 2; flag_dir = true; }
+                
+
+                try
+                {
+                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, i + 1]))
+                    {
+                        dir = rnd.Next(3, 5);
+                        flag_dir = true;
+                    }
+                }
+                catch { dir = 4; flag_dir = true; }
+
+                if (!flag_dir)
+                    dir = rnd.Next(1, 5);
+
+                
+            }
+
+            if (!flag)
+            {
+                i = rnd.Next(n);
+                j = rnd.Next(n);
+            }
+
+            while (arr1[i,j] != 0)
+            {
+                if (flag)
+                {
+                    if (dir == 1)
+                    {
+                        j--;
+                    }
+                    else if (dir == 2)
+                    {
+                        j++;
+                    }
+                    else if (dir == 3)
+                    {
+                        i--;
+                    }
+                    else if (dir == 4)
+                    {
+                        i++;
+                    }
+                }
+                else
+                {
+                    i = rnd.Next(n);
+                    j = rnd.Next(n);
+                }
             }
         }
+
+
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (frm1.hod == 1 && frm1.compflag)
