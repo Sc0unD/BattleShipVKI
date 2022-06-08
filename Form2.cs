@@ -65,7 +65,6 @@ namespace SeaBattleV3
                 {
                     arr1[i, j] = 0;
                     bArr1[i, j] = new Button();
-                    //bArr1[i, j].Text = arr1[i, j].ToString();
                     bArr1[i, j].Width = h;
                     bArr1[i, j].Height = h;
                     bArr1[i, j].Left = x0 + j * h;
@@ -80,9 +79,7 @@ namespace SeaBattleV3
             {
                 for (int j = 0; j < n; j++)
                 {
-                    //arr2[i, j] = 0;
                     bArr2[i, j] = new Button();
-                    //bArr2[i, j].Text = arr2[i, j].ToString();
                     if (arr2[i,j] == 0)
                     {
                         bArr2[i, j].BackColor = Color.Aqua;
@@ -96,7 +93,6 @@ namespace SeaBattleV3
                     bArr2[i, j].Height = h;
                     bArr2[i, j].Left = x0 + j * h + xd;
                     bArr2[i, j].Top = y0 + i * h;
-                    //bArr2[i, j].Click += bt_Click;
                     Controls.Add(bArr2[i, j]);
                 }
             }
@@ -113,8 +109,6 @@ namespace SeaBattleV3
 
             if (frm1.hod == 0 && arr1[i0, j0] == 0)
             {
-                //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
-                //bArr1[i0, j0].Text = frm1.frm3.bArr2[i0, j0].Text;
                 if (frm1.frm3.arr2[i0, j0] == 0)
                 {
                     bArr1[i0, j0].BackColor = Color.Aqua;

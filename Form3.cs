@@ -26,6 +26,8 @@ namespace SeaBattleV3
             4.1, 3.1, 3.2, 2.1, 2.2, 2.3, 1.1, 1.2, 1.3, 1.4
         };
 
+        int dir = 0; 
+        bool flag_dir = false;
 
         public Form3(Form1 fr1)
         {
@@ -44,7 +46,6 @@ namespace SeaBattleV3
         }
         private void Form3_Load(object sender, EventArgs e)
         {
-            //arr2 = frm1.distribution(arr2, n, ships);
             frm1.shipsAdd(ref arr2, n, ships);
 
             if (frm1.textBox2.Text == "")
@@ -62,7 +63,6 @@ namespace SeaBattleV3
                 {
                     arr1[i, j] = 0;
                     bArr1[i, j] = new Button();
-                    //bArr1[i, j].Text = arr1[i, j].ToString();
                     bArr1[i, j].Width = h;
                     bArr1[i, j].Height = h;
                     bArr1[i, j].Left = x0 + j * h;
@@ -77,9 +77,7 @@ namespace SeaBattleV3
             {
                 for (int j = 0; j < n; j++)
                 {
-                    //arr2[i, j] = 0;
                     bArr2[i, j] = new Button();
-                    //bArr2[i, j].Text = arr2[i, j].ToString();
                     if (arr2[i, j] == 0)
                     {
                         bArr2[i, j].BackColor = Color.Aqua;
@@ -93,7 +91,6 @@ namespace SeaBattleV3
                     bArr2[i, j].Height = h;
                     bArr2[i, j].Left = x0 + j * h + xd;
                     bArr2[i, j].Top = y0 + i * h;
-                    //bArr2[i, j].Click += bt_Click;
                     Controls.Add(bArr2[i, j]);
                 }
             }
@@ -110,21 +107,21 @@ namespace SeaBattleV3
 
             if (frm1.hod == 1 && arr1[i0,j0] == 0)
             {
-                //arr1[i0, j0] = frm1.frm2.arr2[i0, j0];
-                //bArr1[i0, j0].Text = frm1.frm2.bArr2[i0, j0].Text;
 
                 if (frm1.frm2.arr2[i0, j0] == 0)
                 {
                     bArr1[i0, j0].BackColor = Color.Aqua;
                     frm1.frm2.bArr2[i0, j0].BackColor = Color.SkyBlue;
-                    frm1.hod = 0;
+                    //frm1.hod = 0;
                     arr1[i0, j0] = -6.0;
                     frm1.frm2.arr2[i0, j0] = -6.0;
                     label6.Text = "Ход противника";
                     frm1.frm2.label6.Text = "Ваш ход";
+                    dir = 0;
+                    flag_dir = false;
                     if (frm1.compflag)
                     {
-                        timer1.Enabled = false;
+                        //timer1.Enabled = false;
                     }
                     else
                     {
@@ -135,15 +132,11 @@ namespace SeaBattleV3
                 }
                 else
                 {
-                    //bArr1[i0, j0].BackColor = Color.Crimson;
-                    //frm1.frm2.bArr2[i0, j0].BackColor = Color.Crimson;
-                    //arr1[i0, j0] = 1;
                     if (frm1.killOrNot(frm1.frm2.arr2, i0, j0, n))
                     {
-                        //frm1.frm3.arr2[i0, j0] = -5.0;
-                        //bArr1[i0, j0].BackColor = Color.Crimson;
-                        //frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
                         frm1.paintIfKill(ref arr1, ref frm1.frm2.arr2, ref bArr1, ref frm1.frm2.bArr2, i0, j0, n);
+                        dir = 0;
+                        flag_dir = false;
                     }
                     else
                     {
@@ -153,12 +146,6 @@ namespace SeaBattleV3
                         frm1.frm2.bArr2[i0, j0].BackColor = Color.DarkOrange;
                     }
                 }
-
-                //frm1.frm2.arr2[i0, j0] = -1;
-                //this.Hide();
-                //Thread.Sleep(2000);
-                //frm1.frm2.Show();
-
             }
 
             if (frm1.lose(frm1.frm2.arr2, n))
@@ -181,21 +168,22 @@ namespace SeaBattleV3
             }
         }
 
-        public void hodForComp(ref int i, ref int j)
+        public void hodForComp()
         {
-            //Thread.Sleep(1200);
-            i = j = 0;
-            int dir = 0;
-            bool flag = false, flag_dir = false;
+            Thread.Sleep(500);
+            //ic = jc = 0;
+            
+            bool flag = false;
 
-            for (int ic = 0; ic < n; ic++)
+
+            for (int i = 0; i < n; i++)
             {
-                for (int jc = 0; jc < n; jc++)
+                for (int j = 0; j < n; j++)
                 {
-                    if (arr1[ic, jc] < 0 && arr1[ic,jc] > -5.0)
+                    if (arr1[i, j] < 0 && arr1[i, j] > -5.0)
                     {
-                        i = ic;
-                        j = jc;
+                        ic = i;
+                        jc = j;
                         flag = true;
                         break;
                     }
@@ -204,130 +192,125 @@ namespace SeaBattleV3
                     break;
             }
 
-            //if (flag)
-            //{
-            //    if (j > 0 && j < n)
-            //    {
-            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j - 1]))    // 1 -> left; 2 -> right; 3 -> up; 4 -> down;
-            //        {
-            //            dir = rnd.Next(1, 3);
-            //            flag_dir = true;
-            //        }
-            //    }
-            //    // else if (j == 0)
-            //    if (i > 0 && i < n)
-            //    {
-            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i - 1, j]))
-            //        {
-            //            dir = rnd.Next(3, 4);
-            //            flag_dir = true;
-            //        }
-            //    }
-
-            //    if (j < n - 1 && j >= 0)
-            //    {
-            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j + 1]))
-            //        {
-            //            dir = rnd.Next(1, 3);
-            //            flag_dir = true;
-            //        }
-            //    }
-
-            //    if (i < n && i >= 0)
-            //    {   
-
-
-            //        if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, i + 1]))
-            //        {
-            //            dir = rnd.Next(3, 5);
-            //            flag_dir = true;
-            //        }
-            //    }
-            //    if (!flag_dir)
-            //        dir = rnd.Next(1, 5);
-            //}
-
-            if (i >= 0 && j >= 0 && i < n && j < n && flag)
+            if (dir == 0)
             {
-                try 
+                if (ic >= 0 && jc >= 0 && ic < n && jc < n && flag)
                 {
-                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j - 1]))    // 1 -> left; 2 -> right; 3 -> up; 4 -> down;
+                    try
                     {
-                        dir = rnd.Next(1, 3);
-                        flag_dir = true;
+                        if (arr1[ic, jc] == arr1[ic, jc - 1])    // 1 -> left; 2 -> right; 3 -> up; 4 -> down;
+                        {
+                            dir = rnd.Next(1, 3);
+                            flag_dir = true;
+                        }
+
                     }
-                
+                    catch { }
+
+                    try
+                    {
+                        if (arr1[ic, jc] == arr1[ic - 1, jc])
+                        {
+                            dir = rnd.Next(3, 5);
+                            flag_dir = true;
+                        }
+                    }
+                    catch {  }
+
+                    try
+                    {
+                        if (arr1[ic, jc] == arr1[ic, jc + 1])
+                        {
+                            dir = rnd.Next(1, 3);
+                            flag_dir = true;
+                        }
+                    }
+                    catch {  }
+
+
+                    try
+                    {
+                        if (arr1[ic, jc] == arr1[ic + 1, jc])
+                        {
+                            dir = rnd.Next(3, 5);
+                            flag_dir = true;
+                        }
+                    }
+                    catch {  }
+
+                    if (!flag_dir)
+                        dir = rnd.Next(1, 5);
+
+
                 }
-                catch { dir = 2; flag_dir = true; }
-                
-                try
+
+                if (!flag && !flag_dir)
                 {
-                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i - 1, j]))
-                    {
-                        dir = rnd.Next(3, 5);
-                        flag_dir = true;
-                    }
+                    ic = rnd.Next(n);
+                    jc = rnd.Next(n);
                 }
-                catch { dir = 3; flag_dir = true; }
-
-                try
-                {
-                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, j + 1]))
-                    {
-                        dir = rnd.Next(1, 3);
-                        flag_dir = true;
-                    }
-                }
-                catch { dir = 2; flag_dir = true; }
-                
-
-                try
-                {
-                    if (Math.Abs(arr1[i, j]) == Math.Abs(arr1[i, i + 1]))
-                    {
-                        dir = rnd.Next(3, 5);
-                        flag_dir = true;
-                    }
-                }
-                catch { dir = 4; flag_dir = true; }
-
-                if (!flag_dir)
-                    dir = rnd.Next(1, 5);
-
-                
             }
 
-            if (!flag)
-            {
-                i = rnd.Next(n);
-                j = rnd.Next(n);
-            }
-
-            while (arr1[i,j] != 0)
+            while (arr1[ic,jc] != 0)
             {
                 if (flag)
                 {
                     if (dir == 1)
                     {
-                        j--;
+                        if (jc - 1 >= 0)
+                        {
+                            if (arr1[ic, jc - 1] > -5.0)
+                                jc--;
+                            else
+                                dir = 2;
+                        }
+                           
+                        else
+                            dir = rnd.Next(1, 5);
                     }
                     else if (dir == 2)
                     {
-                        j++;
+                        if (jc + 1 < n)
+                        {
+                            if (arr1[ic, jc + 1] > -5.0)
+                                jc++;
+                            else
+                                dir = 1;
+                        }
+                            
+                        else
+                            dir = rnd.Next(1, 5);
                     }
                     else if (dir == 3)
                     {
-                        i--;
+                        if (ic - 1 >= 0)
+                        {
+                            if (arr1[ic - 1, jc] > -5.0)
+                                ic--;
+                            else
+                                dir = 4;
+                        } 
+                        else
+                            dir = rnd.Next(1, 5);
                     }
                     else if (dir == 4)
                     {
-                        i++;
+                        if (ic + 1 < n)
+                        {
+                            if (arr1[ic + 1, jc] > -5.0)
+                                ic++;
+                            else
+                                dir = 3;
+                        }
+                            
+                        else
+                            dir = rnd.Next(1, 5);
                     }
                 }
                 else
                 {
-                    i = rnd.Next(n);
-                    j = rnd.Next(n);
+                    ic = rnd.Next(n);
+                    jc = rnd.Next(n);
                 }
             }
         }
@@ -338,7 +321,7 @@ namespace SeaBattleV3
         {
             if (frm1.hod == 1 && frm1.compflag)
             {
-                hodForComp(ref ic, ref jc);
+                hodForComp();
                 bt_Click(bArr1[ic, jc], new EventArgs());
             }
         }
