@@ -1,3 +1,0 @@
-№1 -- Player1 vs Computer -- Победил Computer
-№2 -- Player1 vs Computer -- Победил Computer
-№3 -- Player1 vs Computer -- Победил Computer

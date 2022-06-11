@@ -170,11 +170,10 @@ namespace SeaBattleV3
 
         public void hodForComp()
         {
-            Thread.Sleep(500);
-            //ic = jc = 0;
-            
-            bool flag = false;
-
+            Thread.Sleep(1000);
+            bool flag = false, dir_flag = false, flag_hod = false;
+            int dir = 0; //1 - left, 2 - right, 3 - up, 4 - down
+            ic = jc = 0;
 
             for (int i = 0; i < n; i++)
             {
@@ -192,126 +191,131 @@ namespace SeaBattleV3
                     break;
             }
 
-            if (dir == 0)
+            if (flag)
             {
-                if (ic >= 0 && jc >= 0 && ic < n && jc < n && flag)
+                if (jc-1 >= 0 && jc + 1 < n)
                 {
-                    try
+                    if (arr1[ic,jc-1] == arr1[ic, jc] || arr1[ic, jc + 1] == arr1[ic, jc])
                     {
-                        if (arr1[ic, jc] == arr1[ic, jc - 1])    // 1 -> left; 2 -> right; 3 -> up; 4 -> down;
-                        {
-                            dir = rnd.Next(1, 3);
-                            flag_dir = true;
-                        }
-
+                        dir = rnd.Next(1, 3);
+                        dir_flag = true;
                     }
-                    catch { }
-
-                    try
+                }
+                else if (jc + 1 >= n)
+                {
+                    if (arr1[ic, jc - 1] == arr1[ic, jc])
                     {
-                        if (arr1[ic, jc] == arr1[ic - 1, jc])
-                        {
-                            dir = rnd.Next(3, 5);
-                            flag_dir = true;
-                        }
+                        dir = 1;
+                        dir_flag = true;
                     }
-                    catch {  }
-
-                    try
-                    {
-                        if (arr1[ic, jc] == arr1[ic, jc + 1])
-                        {
-                            dir = rnd.Next(1, 3);
-                            flag_dir = true;
-                        }
-                    }
-                    catch {  }
-
-
-                    try
-                    {
-                        if (arr1[ic, jc] == arr1[ic + 1, jc])
-                        {
-                            dir = rnd.Next(3, 5);
-                            flag_dir = true;
-                        }
-                    }
-                    catch {  }
-
-                    if (!flag_dir)
-                        dir = rnd.Next(1, 5);
-
-
                 }
 
-                if (!flag && !flag_dir)
+                else if (jc - 1 < 0)
                 {
-                    ic = rnd.Next(n);
-                    jc = rnd.Next(n);
+                    if (arr1[ic, jc + 1] == arr1[ic, jc])
+                    {
+                        dir = 2;
+                        dir_flag = true;
+                    }
+                }
+
+                else if (ic - 1 >= 0 && ic + 1 < n)
+                {
+                    if (arr1[ic - 1, jc] == arr1[ic, jc] || arr1[ic + 1, jc] == arr1[ic, jc])
+                    {
+                        dir = rnd.Next(3, 5);
+                        dir_flag = true;
+                    }
+                }
+                else if (ic + 1 >= n)
+                {
+                    if (arr1[ic - 1, jc] == arr1[ic, jc])
+                    {
+                        dir = 3;
+                        dir_flag = true;
+                    }
+                }
+
+                else if (jc - 1 < 0)
+                {
+                    if (arr1[ic + 1, jc] == arr1[ic, jc])
+                    {
+                        dir = 4;
+                        dir_flag = true;
+                    }
+                }
+                if (!dir_flag)
+                {
+                    while (!dir_flag)
+                    {
+                        dir = rnd.Next(1,5);
+                        dir_flag = true;
+                        if (dir == 1)
+                        {
+                            if (jc - 1 < 0)
+                                dir_flag = false;
+                        }
+                        else if (dir == 2)
+                        {
+                            if (jc + 1 >= n)
+                                dir_flag = false;
+                        }
+                        else if (dir == 3)
+                        {
+                            if (ic - 1 < 0)
+                                dir_flag = false;
+                        }
+                        else if (dir == 4)
+                        {
+                            if (ic + 1 >= n)
+                                dir_flag = false;
+                        }
+                    }
                 }
             }
 
-            while (arr1[ic,jc] != 0)
+            if (flag && dir_flag)
             {
-                if (flag)
+                while (!flag_hod)
                 {
                     if (dir == 1)
                     {
-                        if (jc - 1 >= 0)
+                        if (arr1[ic,jc - 1] == 0 || arr1[ic, jc - 1] == -6.0)
                         {
-                            if (arr1[ic, jc - 1] > -5.0)
-                                jc--;
-                            else
-                                dir = 2;
+                            flag_hod = true;
                         }
-                           
-                        else
-                            dir = rnd.Next(1, 5);
+                        jc--;
                     }
                     else if (dir == 2)
                     {
-                        if (jc + 1 < n)
+                        if (arr1[ic, jc + 1] >= 0 || arr1[ic, jc + 1] == -6.0)
                         {
-                            if (arr1[ic, jc + 1] > -5.0)
-                                jc++;
-                            else
-                                dir = 1;
+                            flag_hod = true;
                         }
-                            
-                        else
-                            dir = rnd.Next(1, 5);
+                        jc++;
                     }
                     else if (dir == 3)
                     {
-                        if (ic - 1 >= 0)
+                        if (arr1[ic - 1, jc] >= 0 || arr1[ic - 1, jc] == -6.0)
                         {
-                            if (arr1[ic - 1, jc] > -5.0)
-                                ic--;
-                            else
-                                dir = 4;
-                        } 
-                        else
-                            dir = rnd.Next(1, 5);
+                            flag_hod = true;
+                        }
+                        ic--;
                     }
                     else if (dir == 4)
                     {
-                        if (ic + 1 < n)
+                        if (arr1[ic + 1, jc] >= 0 || arr1[ic + 1, jc] == -6.0)
                         {
-                            if (arr1[ic + 1, jc] > -5.0)
-                                ic++;
-                            else
-                                dir = 3;
+                            flag_hod = true;
                         }
-                            
-                        else
-                            dir = rnd.Next(1, 5);
+                        ic++;
                     }
                 }
-                else
-                {
-                    ic = rnd.Next(n);
-                    jc = rnd.Next(n);
-                }
+            }
+
+            if (!flag && !flag_dir)
+            {
+                while (arr1[ic = rnd.Next(n), jc = rnd.Next(n)] != 0) {; }
             }
         }
 

@@ -25,6 +25,7 @@ namespace SeaBattleV3
             InitializeComponent();
             hod = rnd.Next(2);
             this.StartPosition = FormStartPosition.CenterScreen;
+            button5.ContextMenuStrip = contextMenuStrip1;
 
         }
 
@@ -263,7 +264,7 @@ namespace SeaBattleV3
 
         }
 
-        private void очиститьФайлСИсториейМатчейToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Clear_file_Click(object sender, EventArgs e)
         {
             File.WriteAllText("Materials\\match_results.txt", "");
         }
