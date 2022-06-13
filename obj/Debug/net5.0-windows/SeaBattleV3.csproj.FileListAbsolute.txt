@@ -120,7 +120,6 @@ D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.csproj.AssemblyRe
 D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.Form1.resources
 D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.Form2.resources
 D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.Form3.resources
-D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.Form4.resources
 D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.Properties.Resources.resources
 D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.csproj.GenerateResource.cache
 D:\Projects\BattleShipVKI\obj\Debug\net5.0-windows\SeaBattleV3.GeneratedMSBuildEditorConfig.editorconfig

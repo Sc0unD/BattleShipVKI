@@ -34,8 +34,7 @@ namespace SeaBattleV3
         {
             InitializeComponent();
             this.frm1 = fr1;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(100, 1080 / 2 - (int)(this.Height / 1.5)); 
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Width = 812;
             this.Height = 514;
             label6.Location = new Point(12,this.Height - 56 - label6.Height);
@@ -47,7 +46,6 @@ namespace SeaBattleV3
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            //frm1.distribution(arr2, n, ships);
             frm1.shipsAdd(ref arr2, n, ships);
 
             if (frm1.textBox1.Text == "")
@@ -124,9 +122,9 @@ namespace SeaBattleV3
                     }
                     else
                     {
-                        //this.Hide();
-                        //Thread.Sleep(2000);
-                        //frm1.frm3.Show();
+                        this.Hide();
+                        Thread.Sleep(2000);
+                        frm1.frm3.Show();
                     }
 
                 }
@@ -134,9 +132,6 @@ namespace SeaBattleV3
                 {
                     if (frm1.killOrNot(frm1.frm3.arr2, i0, j0, n))
                     {
-                        //frm1.frm3.arr2[i0, j0] = -5.0;
-                        //bArr1[i0, j0].BackColor = Color.Crimson;
-                        //frm1.frm3.bArr2[i0, j0].BackColor = Color.Crimson;
                         frm1.paintIfKill(ref arr1, ref frm1.frm3.arr2, ref bArr1, ref frm1.frm3.bArr2, i0, j0,n);
                     }
                     else
@@ -146,12 +141,7 @@ namespace SeaBattleV3
                         bArr1[i0, j0].BackColor = Color.DarkOrange;
                         frm1.frm3.bArr2[i0, j0].BackColor = Color.DarkOrange;
                     }
-                    //arr1[i0, j0] = frm1.frm3.arr2[i0, j0];
-                    //arr2[i0, j0] = frm1.frm3.arr2[i0, j0];
-
-                }
-                //frm1.frm3.arr2[i0, j0] = -1;
-                
+                }           
             }
 
 

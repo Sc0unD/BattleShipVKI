@@ -15,7 +15,6 @@ namespace SeaBattleV3
     {
         public Form2 frm2;
         public Form3 frm3;
-        public Form4 frm4;
         public int hod;
         public bool compflag;
         Random rnd = new();
@@ -41,23 +40,21 @@ namespace SeaBattleV3
                 {
                     frm2.label6.Text = "Ваш ход";
                     frm3.label6.Text = "Ход противника";
-                    //frm3.Hide();
+                    frm3.Hide();
                 }
                 else
                 {
-                    //hod = 0;
                     frm3.label6.Text = "Ваш ход";
                     frm2.label6.Text = "Ход противника";
-                    //frm2.Hide();
+                    frm2.Hide();
                 }
             }
             else if (compflag)
             {
-                //frm3.Hide();
+                frm3.Hide();
                 hod = 0;
                 frm2.label6.Text = "Ваш ход";
                 frm3.Text = "Computer";
-                //frm3.label6.Text = "Ход противника";
                 
             }
         }
@@ -252,12 +249,14 @@ namespace SeaBattleV3
                     }
                     else if (arr2[i, j] == 0)
                     {
-                        arr2[i0, j0] = -5.0;
+                        arr2[i, j] = -6.0;
+                        arr1[i, j] = -6.0;
                         bArr1[i, j].BackColor = Color.Aqua;
                         bArr2[i, j].BackColor = Color.SkyBlue;
                     }
                 }
             }
+            arr2[i0, j0] = -5.0;
             arr1[i0, j0] = -5.0;
             bArr1[i0, j0].BackColor = Color.Crimson;
             bArr2[i0, j0].BackColor = Color.Crimson; 
@@ -267,6 +266,20 @@ namespace SeaBattleV3
         private void Clear_file_Click(object sender, EventArgs e)
         {
             File.WriteAllText("Materials\\match_results.txt", "");
+        }
+
+        public void da()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    frm3.bArr1[i, j].Text = frm3.arr1[i, j].ToString();
+                    frm3.bArr2[i, j].Text = frm3.arr2[i, j].ToString();
+                    frm2.bArr1[i, j].Text = frm2.arr1[i, j].ToString();
+                    frm2.bArr2[i, j].Text = frm2.arr2[i, j].ToString();
+                }
+            }
         }
     }
 }

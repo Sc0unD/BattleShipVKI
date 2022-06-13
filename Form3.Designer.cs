@@ -44,9 +44,9 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Red;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(567, 329);
+            this.label3.Location = new System.Drawing.Point(648, 439);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 16);
+            this.label3.Size = new System.Drawing.Size(137, 19);
             this.label3.TabIndex = 5;
             this.label3.Text = "Корабль потоплен";
             // 
@@ -55,9 +55,9 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.DarkOrange;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(610, 308);
+            this.label1.Location = new System.Drawing.Point(697, 411);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 16);
+            this.label1.Size = new System.Drawing.Size(85, 19);
             this.label1.TabIndex = 3;
             this.label1.Text = "Попадание";
             // 
@@ -65,9 +65,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(337, 75);
+            this.label4.Location = new System.Drawing.Point(385, 100);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(131, 12);
+            this.label4.Size = new System.Drawing.Size(169, 15);
             this.label4.TabIndex = 6;
             this.label4.Text = "Корабли противника";
             // 
@@ -75,9 +75,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(567, 14);
+            this.label5.Location = new System.Drawing.Point(648, 19);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 12);
+            this.label5.Size = new System.Drawing.Size(115, 15);
             this.label5.TabIndex = 7;
             this.label5.Text = "Ваши корабли";
             // 
@@ -85,15 +85,14 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Lucida Console", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(10, 319);
+            this.label6.Location = new System.Drawing.Point(11, 425);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 27);
+            this.label6.Size = new System.Drawing.Size(155, 33);
             this.label6.TabIndex = 8;
             this.label6.Text = "Ваш ход";
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label2
@@ -101,17 +100,17 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(635, 286);
+            this.label2.Location = new System.Drawing.Point(726, 381);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 16);
+            this.label2.Size = new System.Drawing.Size(52, 19);
             this.label2.TabIndex = 9;
             this.label2.Text = "Мимо";
             // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 350);
+            this.ClientSize = new System.Drawing.Size(794, 467);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -119,7 +118,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form3";
